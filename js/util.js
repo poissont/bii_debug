@@ -118,6 +118,27 @@ function getQueryParams(qs) {
     return params;
 }
 
+function bii_cut_and_paste(){
+//	bii_CL("cut and paste");
+	jQuery(".bii-cut-and-paste").each(function(){
+		var content = jQuery(this).html();
+		var selector = jQuery(this).attr("data-selector");
+//		bii_CL(selector);
+		if(selector){
+			var position = jQuery(this).attr("data-position");
+			if(!position){
+				position = "after";
+			}
+			if(position == "before"){
+				jQuery(selector).prepend(content);
+			}
+			if(position == "after"){
+				jQuery(selector).append(content);
+			}			
+		}
+		jQuery(this).text("");
+	});
+}
 
 function makeid(length)
 {
@@ -130,6 +151,11 @@ function makeid(length)
 		text += possible.charAt(Math.floor(Math.random() * possible.length));
 	return text;
 }
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
 // Si le navigateur ne prend pas en charge le placeholder
 if (document.createElement('input').placeholder == undefined) {
 	// Champ avec un attribut HTML5 placeholder

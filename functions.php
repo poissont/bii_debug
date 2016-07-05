@@ -286,7 +286,7 @@ if (!function_exists("debugEcho")) {
 		return $return;
 	}
 
-	function bii_makestuffbox($option, $name, $type = "text", $class_stuffbox = "", $options = [], $class_input = "") {
+	function bii_makestuffbox($option, $name, $type = "text", $class_stuffbox = "", $options = [], $class_input = "",$content = "") {
 		if (!$class_stuffbox || $type == "wpeditor") {
 			$class_stuffbox = "col-xxs-12";
 		}
@@ -296,6 +296,7 @@ if (!function_exists("debugEcho")) {
 			<div class="inside">
 				<?php bii_makeinput($option, $type, $class_input, $options); ?>
 			</div>
+			<p><?= $content ?></p>
 		</div>
 		<?php
 	}

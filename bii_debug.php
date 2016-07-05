@@ -2,12 +2,12 @@
 /*
   Plugin Name: BiiDebug
   Description: Ajoute des fonctions de débug, invisibles pour le public
-  Version: 2.1.0
+  Version: 2.1.1
   Author: Biilink Agency
   Author URI: http://biilink.com/
   License: GPL2
  */
-define('bii_debug_version', '2.1.0');
+define('bii_debug_version', '2.1.1');
 
 define('BiiDebug_path', plugin_dir_path(__FILE__));
 
@@ -56,15 +56,22 @@ if (get_option("bii_disallow_emojis") === false) {
 }
 
 function bii_showlogs() {
+	$role = "user";
+	if(current_user_can("Activate plugins")){
+		$role= "admin";
+	}
+	
 	?>
 	<script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
 	<script type="text/javascript">
 		var ajaxurl = '<?= admin_url('admin-ajax.php'); ?>';
 		var bloginfourl = '<?= get_bloginfo("url") ?>';
 		var bii_showlogs = false;
+		var bii_role = "<?= $role; ?>";
+		var bii_lang = "fr";
 		var ip_client = myip;
 		if (ip_client == "<?= get_option("bii_ipallowed"); ?>") {
-			bii_showlogs = true;
+			bii_showlogs = true;			
 		}
 		var bii_multilingual_activated = false;
 		var bii_medium = "(max-width: <?= get_option("bii_medium_width"); ?>px";
